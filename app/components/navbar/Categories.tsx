@@ -34,12 +34,12 @@ export const categories = [
     {
         label: 'Modern',
         icon: MdOutlineVilla,
-        description: 'This property is in the countryside!' 
+        description: 'This property is modern!' 
     },
     {
         label: 'Countryside',
         icon: TbMountain,
-        description: 'This property is modern!' 
+        description: 'This property is in the countryside!' 
     },
     {
         label: 'Pools',
