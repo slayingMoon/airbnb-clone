@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { AiOutlineMenu } from 'react-icons/ai';
 import Avatar from '../Avatar';
 import { useCallback, useState } from 'react';
@@ -18,6 +19,7 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({
     currentUser
 }) => {
+    const router = useRouter();
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
     const rentModal = useRentModal();
@@ -37,9 +39,9 @@ const UserMenu: React.FC<UserMenuProps> = ({
     }, [currentUser, loginModal, rentModal]);
 
     //close UserMenu onOpenModal
-    const handleOpenModal = (modalAction: () => void) => {
+    const handleMenuAction = (action: () => void) => {
         toggleOpen();
-        modalAction();
+        action();
     }
 
     return (
@@ -106,7 +108,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                         {currentUser ? (
                             <>
                                 <MenuItem
-                                    onClick={() => {}}
+                                    onClick={() => handleMenuAction(() => router.push("/trips"))}
                                     label="My trips"
                                 />
                                 <MenuItem
@@ -122,7 +124,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                                     label="My properties"
                                 />
                                 <MenuItem
-                                    onClick={() => handleOpenModal(rentModal.onOpen)}
+                                    onClick={() => handleMenuAction(rentModal.onOpen)}
                                     label="Airbnb my home"
                                 />
                                 <hr />
@@ -134,11 +136,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
                         ) : (
                             <>
                                 <MenuItem
-                                    onClick={() => handleOpenModal(loginModal.onOpen) }
+                                    onClick={() => handleMenuAction(loginModal.onOpen) }
                                     label="Login"
                                 />
                                 <MenuItem
-                                    onClick={() => handleOpenModal(registerModal.onOpen) }
+                                    onClick={() => handleMenuAction(registerModal.onOpen) }
                                     label="Sign up"
                                 />
                             </>
